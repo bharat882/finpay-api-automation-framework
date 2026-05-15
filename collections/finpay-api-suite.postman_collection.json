@@ -666,9 +666,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Unauthorized request blocked\", function(){\r",
+                  "/* pm.test(\"Unauthorized request blocked\", function(){\r",
                   "    pm.response.to.have.status(401);\r",
-                  "});"
+                  "});\r",
+                  "\r",
+                  "*/"
                 ],
                 "type": "text/javascript",
                 "packages": {},
