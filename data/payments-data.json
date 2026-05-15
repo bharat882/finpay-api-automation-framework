@@ -1,0 +1,17 @@
+[
+  {
+    "amount": 10,
+    "currency": "CAD",
+    "description": "coffee payment"
+  },
+  {
+    "amount": 50,
+    "currency": "CAD",
+    "description": "subscription payment"
+  },
+  {
+    "amount": 100,
+    "currency": "CAD",
+    "description": "premium payment"
+  }
+]
