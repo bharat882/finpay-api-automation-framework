@@ -22,6 +22,9 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
+      - name: Install HTML Reporter
+        run: npm install -g newman-reporter-html
+
       - name: Create Reports Directory
         run: mkdir -p reports
 
@@ -31,6 +34,9 @@ jobs:
           -e environments/finpay-dev.json \
           -r cli,html \
           --reporter-html-export reports/finpay-report.html
+
+      - name: Verify Report File Exists
+        run: ls -R reports
 
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
