@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["token", "expires_in", "user_id"],
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "expires_in": {
+      "type": "number"
+    },
+    "user_id": {
+      "type": "string"
+    }
+  }
+}

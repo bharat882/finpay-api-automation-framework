@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "required": ["payment_id", "status", "amount", "currency"],
+  "properties": {
+    "payment_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "pending", "failed"]
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    }
+  }
+}

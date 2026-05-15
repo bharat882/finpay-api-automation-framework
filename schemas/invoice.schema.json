@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "required": ["invoice_id", "amount", "status"],
+  "properties": {
+    "invoice_id": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["paid", "pending", "failed"]
+    }
+  }
+}

@@ -178,6 +178,8 @@
                   "    pm.expect(response.token).to.exist;\r",
                   "});\r",
                   "\r",
+                  "\r",
+                  "\r",
                   "pm.environment.set(\"auth_token\",response.token);"
                 ],
                 "type": "text/javascript",
@@ -249,7 +251,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n  \"email\": \"qa@finpay.com\",\r\n  \"password\": \"Test@123\"\r\n}",
+                  "raw": "{\r\n  \"email\": \"aa@finpay.com\",\r\n  \"password\": \"\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -573,7 +575,24 @@
                   "    pm.expect(response.status).to.be.oneOf(['pending', 'processing']);\r",
                   "});\r",
                   "\r",
-                  "pm.environment.set(\"payment_id\", response.payment_id);"
+                  "const schema = {\r",
+                  "  type: \"object\",\r",
+                  "  required: [\"payment_id\", \"status\", \"amount\", \"currency\"],\r",
+                  "  properties: {\r",
+                  "    payment_id: { type: \"string\" },\r",
+                  "    status: { type: \"string\" },\r",
+                  "    amount: { type: \"number\" },\r",
+                  "    currency: { type: \"string\" }\r",
+                  "  }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Payments Schema Validation - Success\", function () {\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"payment_id\", response.payment_id);\r",
+                  "\r",
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -597,7 +616,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"amount\": {{amount}},\r\n    \"currency\": \"{{currency}}\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+              "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -868,6 +887,20 @@
                 "exec": [
                   "pm.test(\"Invalid card rejected\", function(){\r",
                   "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const errorSchema = {\r",
+                  "  type: \"object\",\r",
+                  "  required: [\"error\"],\r",
+                  "  properties: {\r",
+                  "    error: { type: \"string\" },\r",
+                  "    message: { type: \"string\" },\r",
+                  "    code: { type: \"number\" }\r",
+                  "  }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Payments Schema Validation - Error\", function () {\r",
+                  "    pm.response.to.have.jsonSchema(errorSchema);\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -982,6 +1015,20 @@
                   "    ]);\r",
                   "});\r",
                   "\r",
+                  "pm.test(\"Response matches JSON Schema\", function () {\r",
+                  "    const schema = {\r",
+                  "        type: \"object\",\r",
+                  "        required: [\"payment_id\", \"status\"],\r",
+                  "        properties: {\r",
+                  "            payment_id: { type: \"string\" },\r",
+                  "            status: { type: \"string\" },\r",
+                  "            amount: { type: \"number\" },\r",
+                  "            currency: { type: \"string\" }\r",
+                  "        }\r",
+                  "    };\r",
+                  "\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});\r",
                   ""
                 ],
                 "type": "text/javascript",

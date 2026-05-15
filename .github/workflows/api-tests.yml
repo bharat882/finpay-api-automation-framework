@@ -28,11 +28,19 @@ jobs:
       - name: Create Reports Directory
         run: mkdir -p reports
 
-      - name: Run Data-Driven API Tests
+     # - name: Run Data-Driven API Tests
+     #   run: |
+     #       newman run collections/finpay-api-suite.postman_collection.json \
+     #       -e environments/finpay-dev.json \
+     #        data/payments-data.json \
+     #       -r cli,html \
+     #       --reporter-html-export reports/finpay-report.html
+
+
+      - name: Run API Tests (Regression Suite)
         run: |
             newman run collections/finpay-api-suite.postman_collection.json \
             -e environments/finpay-dev.json \
-            -d data/payments-data.json \
             -r cli,html \
             --reporter-html-export reports/finpay-report.html
 
