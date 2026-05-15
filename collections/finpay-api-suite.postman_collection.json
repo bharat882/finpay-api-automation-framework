@@ -384,7 +384,7 @@
               "_postman_previewlanguage": null,
               "header": null,
               "cookie": [],
-              "body": "{\r\n  \"invoice_id\": \"inv_1001\",\r\n  \"user_id\": 1,\r\n  \"total\": 100,\r\n  \"status\": \"generated\"\r\n}"
+              "body": "{\r\n  \"id\": \"inv_1001\",\r\n  \"user_id\": 1,\r\n  \"total\": 100,\r\n  \"status\": \"generated\"\r\n}"
             }
           ]
         },
@@ -543,7 +543,7 @@
                   "path": ""
                 }
               ],
-              "body": "{\n  \"invoice_id\": \"inv_1001\",\n  \"user_id\": 1,\n  \"total\": 100,\n  \"status\": \"generated\"\n}"
+              "body": "{\n  \"id\": \"inv_1001\",\n  \"user_id\": 1,\n  \"total\": 100,\n  \"status\": \"generated\"\n}"
             }
           ]
         }
@@ -683,6 +683,11 @@
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text"
               }
             ],
             "body": {
@@ -702,7 +707,8 @@
               "path": [
                 "payments"
               ]
-            }
+            },
+            "description": "## Unauthorized Payment Request\n\nThis request tests the **POST /payments** endpoint under an unauthorized access scenario — specifically, when the `Authorization` header is missing or empty.\n\n### Purpose\n\nValidates that the API correctly rejects payment attempts that lack valid authentication credentials, ensuring the endpoint is properly secured against unauthorized access.\n\n### Expected Behavior\n\nThe server should respond with **`401 Unauthorized`**, blocking the payment from being processed.\n\n### Request Body\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `amount` | integer | The payment amount (e.g. `150`) |\n| `currency` | string | Currency code (e.g. `\"CAD\"`) |\n| `payment_method` | string | Payment method type (e.g. `\"card\"`) |\n| `card_number` | string | The card number to charge |\n| `expiry` | string | Card expiry date in `MM/YY` format |\n| `cvv` | string | Card security code |\n\n### Headers\n\n| Header | Value |\n| --- | --- |\n| `Content-Type` | `application/json` |\n| `Authorization` | _(empty — intentionally omitted to trigger 401)_ |\n\n### Post-Response Test\n\nThe following test is run after the response is received to assert the expected 401 status:\n\n``` js\npm.test(\"Unauthorized request blocked\", function() {\n    pm.response.to.have.status(401);\n});\n\n ```"
           },
           "response": [
             {
@@ -713,6 +719,11 @@
                   {
                     "key": "Content-Type",
                     "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "",
                     "type": "text"
                   }
                 ],
