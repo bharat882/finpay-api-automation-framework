@@ -1,0 +1,26 @@
+name: FinPay API Automation Suite
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run FinPay API Test Suite
+        run: newman run "FinPay - API Automation Suite.postman_collection.json"

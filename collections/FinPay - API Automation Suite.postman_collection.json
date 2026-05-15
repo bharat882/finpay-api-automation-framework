@@ -1,0 +1,1401 @@
+{
+  "info": {
+    "_postman_id": "8339b45b-40ad-4396-970e-bc8951318a3d",
+    "name": "FinPay - API Automation Suite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32234429",
+    "_collection_link": "https://go.postman.co/collection/32234429-8339b45b-40ad-4396-970e-bc8951318a3d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "FinPay - Authentication APIs",
+      "item": [
+        {
+          "name": "Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Profile fetched successfully\", function(){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"User ID exists\", function(){\r",
+                  "    pm.expect(response.id).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"user_id\",response.id);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Profile Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/auth/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 15 May 2026 18:55:04 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "x-srv-trace",
+                  "value": "v=1;t=bb84524a411c7fee"
+                },
+                {
+                  "key": "x-srv-span",
+                  "value": "v=1;s=d21416b72ec2202f"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "x-ratelimit-limit",
+                  "value": "120"
+                },
+                {
+                  "key": "x-ratelimit-remaining",
+                  "value": "119"
+                },
+                {
+                  "key": "x-ratelimit-reset",
+                  "value": "1778871364"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "x-envoy-upstream-service-time",
+                  "value": "146"
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "set-cookie",
+                  "value": "__cf_bm=iGXYu42HZTP4mtt.RrEPL1H.dg028aavwVfEP90q.ZM-1778871304.5595307-1.0.1.1-PgB79rLw9ax.IvxqvrW.L31nMzMDeG18ImlRjBT811q2ootb2wBmQJv3G_nsV54oTg3LIHbOrhjy3kR_.sDdRVNmNgQkPE1IEOIiIs5f9rxQer4clcOkD25luLz4qx3K; HttpOnly; SameSite=None; Secure; Path=/; Domain=pstmn.io; Expires=Fri, 15 May 2026 19:25:04 GMT"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "9fc45ad579e8ac57-YYZ"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"FinPay User\",\n  \"email\": \"user@finpay.com\",\n  \"role\": \"customer\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Login successful\", function (){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Token exists\", function(){\r",
+                  "    pm.expect(response.token).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"auth_token\",response.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"qa@finpay.com\",\r\n  \"password\": \"Test@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"qa@finpay.com\",\r\n  \"password\": \"Test@123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"token\": \"mock-jwt-123456\",\r\n  \"user_id\": 1,\r\n  \"role\": \"customer\",\r\n  \"expires_in\": 3600\r\n}"
+            },
+            {
+              "name": "Invalid Credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"qa@finpay.com\",\r\n  \"password\": \"Test@123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"error\": \"Invalid email or password\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FinPay - Invoice APIs",
+      "item": [
+        {
+          "name": "Create Invoice",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invoice created\", function(){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const invoice = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Invoice ID exists\", function(){\r",
+                  "    pm.expect(invoice.id).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Total amount calculated\", function(){\r",
+                  "    pm.expect(invoice.total).to.eql(100);\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"invoice_id\", invoice.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user_id\": \"{{user_id}}\",\r\n  \"items\": [\r\n    {\r\n      \"name\": \"API Testing Service\",\r\n      \"quantity\": 2,\r\n      \"price\": 50\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/invoices",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "invoices"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Invoice Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"user_id\": \"{{user_id}}\",\r\n  \"items\": [\r\n    {\r\n      \"name\": \"API Testing Service\",\r\n      \"quantity\": 2,\r\n      \"price\": 50\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "invoices"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"invoice_id\": \"inv_1001\",\r\n  \"user_id\": 1,\r\n  \"total\": 100,\r\n  \"status\": \"generated\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Invoice",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invoice feteched\", function(){\r",
+                  "    pm.expect(pm.response.code).to.eql(200);\r",
+                  "});\r",
+                  "\r",
+                  "const invoice = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Invoice belongs to user\", function(){\r",
+                  "    pm.expect(invoice.user_id).to.eql(pm.environment.get(\"user_id\"));\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {}
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": " Bearer {{auth_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/invoices/{{invoice_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "invoices",
+                "{{invoice_id}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Invoice Retrieved",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": " Bearer {{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/invoices/inv_1001",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "invoices",
+                    "inv_1001"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 15 May 2026 19:39:33 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "x-srv-trace",
+                  "value": "v=1;t=28cef13dec48d664"
+                },
+                {
+                  "key": "x-srv-span",
+                  "value": "v=1;s=86a4b9fd24ab77ec"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "x-ratelimit-limit",
+                  "value": "120"
+                },
+                {
+                  "key": "x-ratelimit-remaining",
+                  "value": "119"
+                },
+                {
+                  "key": "x-ratelimit-reset",
+                  "value": "1778874033"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "x-envoy-upstream-service-time",
+                  "value": "175"
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "set-cookie",
+                  "value": "__cf_bm=RGrb9G3OYs43Mzjx7iH9OsGkaUIEejlp3hBweV7vLJo-1778873973.434623-1.0.1.1-2CFReqi40bp5pzcQL5XyeEKi8vRS5coiuZdeQJ43VJZqKs8TTa4Jx6wWeT0PQTzXnKcXjc.4McRUeokhuKGuGns.C72iRtCjVWV0xESGOgHlRTxAl6aOPmXYdr8jcw8G; HttpOnly; SameSite=None; Secure; Path=/; Domain=pstmn.io; Expires=Fri, 15 May 2026 20:09:33 GMT"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "9fc49bfdfe2f11fc-YYZ"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n  \"invoice_id\": \"inv_1001\",\n  \"user_id\": 1,\n  \"total\": 100,\n  \"status\": \"generated\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FinPay - Payments APIs",
+      "item": [
+        {
+          "name": "Create Payment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Payment request accepted\", function(){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Payment ID generated\", function () {\r",
+                  "    pm.expect(response.payment_id).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Payment status is pending or processing\",function(){\r",
+                  "    pm.expect(response.status).to.be.oneOf(['pending', 'processing']);\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"payment_id\", response.payment_id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/payments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Payment Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/payments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "payments"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"payment_id\": \"pay_1001\",\r\n  \"status\": \"pending\",\r\n  \"amount\": 150,\r\n  \"currency\": \"CAD\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Unauthorized Payment Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Unauthorized request blocked\", function(){\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/payments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Unauthorized Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/payments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "payments"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"error\": \"Unauthorized access\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Missing Amount Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Missing amount rejected\", function(){\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/payments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Missing Amount",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"41111111111\",\r\n    \"expiry\": \"12/29\",\r\n    \"cvv\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/payments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "payments"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n  \"error\": \"Missing amount\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Invalid Card Payment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invalid card rejected\", function(){\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"0000000000\",\r\n    \"expiry\": \"01/20\",\r\n    \"cvv\": \"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/payments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Invalid Card Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"amount\": 150.00,\r\n    \"currency\": \"CAD\",\r\n    \"payment_method\": \"card\",\r\n    \"card_number\": \"0000000000\",\r\n    \"expiry\": \"01/20\",\r\n    \"cvv\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/payments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "payments"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n  \"error\": \"Invalid card number\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Payment Status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Payment status fetched\", function(){\r",
+                  "    pm.expect(pm.response.to.have.status(200));\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Valid Payment status\", function(){\r",
+                  "    pm.expect(response.status).to.be.oneOf([\r",
+                  "        \"pending\",\r",
+                  "        \"processing\",\r",
+                  "        \"success\",\r",
+                  "        \"failed\"\r",
+                  "    ]);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/payments/{{payment_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments",
+                "{{payment_id}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Payment Status Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/payments/pay_1001",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "payments",
+                    "pay_1001"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 15 May 2026 19:18:30 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "x-srv-trace",
+                  "value": "v=1;t=e3df608e17a0cdfe"
+                },
+                {
+                  "key": "x-srv-span",
+                  "value": "v=1;s=1a289d060f0f925e"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "x-ratelimit-limit",
+                  "value": "120"
+                },
+                {
+                  "key": "x-ratelimit-remaining",
+                  "value": "119"
+                },
+                {
+                  "key": "x-ratelimit-reset",
+                  "value": "1778872769"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "x-envoy-upstream-service-time",
+                  "value": "173"
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "set-cookie",
+                  "value": "__cf_bm=h9If64KW_Ytw5LT0_TtwAnjzcwV.MZ81kvNOQ.JNDqE-1778872709.8195767-1.0.1.1-GJIcTkP6DtYcuQGpRrNTUStvBfMkyszG71q2wUedrcC1WafLBXddxcxFUmrN6oZO6xL1iYZXQs_hvCDJTfChO03AOQqIfQq9J0sgu7rdkeo1ozetdKxv4fwivGUnpG4W; HttpOnly; SameSite=None; Secure; Path=/; Domain=pstmn.io; Expires=Fri, 15 May 2026 19:48:30 GMT"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "9fc47d245fb7abee-YYZ"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"payment_id\": \"pay_1001\",\n  \"status\": \"success\",\n  \"amount\": 150,\n  \"currency\": \"CAD\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Refund",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Refund processed\", function (){\r",
+                  "    pm.expect(pm.response.to.have.status(200));\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Refund status confirmed\", function(){\r",
+                  "    pm.expect(response.refund_status).to.eql(\"processed\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/payments/{{payment_id}}/refund",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments",
+                "{{payment_id}}",
+                "refund"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Refund Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/payments/pay_1001/refund",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "payments",
+                    "pay_1001",
+                    "refund"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"payment_id\": \"pay_1001\",\r\n  \"refund_status\": \"processed\"\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FinPay - Users APIs",
+      "item": [
+        {
+          "name": "User Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"User profile fetched\", function(){\r",
+                  "    pm.expect(pm.response.code).to.eql(200);\r",
+                  "});\r",
+                  "\r",
+                  "const user = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"User ID matches\", function(){\r",
+                  "    pm.expect(user.id).to.eql(pm.environment.get(\"user_id\"));\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email exists\", function(){\r",
+                  "    pm.expect(user.email).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "const schema = {\r",
+                  "  \"type\": \"object\",\r",
+                  "  \"required\": [\"id\", \"name\", \"email\"],\r",
+                  "  \"properties\": {\r",
+                  "    \"id\": { \"type\": \"number\" },\r",
+                  "    \"name\": { \"type\": \"string\" },\r",
+                  "    \"email\": { \"type\": \"string\" }\r",
+                  "  }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Schema validation\", function(){\r",
+                  "    pm.expect(tv4.validate(user, schema)).to.be.true;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "{{user_id}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "User Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/{{user_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{user_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 15 May 2026 18:56:13 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "x-srv-trace",
+                  "value": "v=1;t=6a62e7b7984dad21"
+                },
+                {
+                  "key": "x-srv-span",
+                  "value": "v=1;s=8276aa3e37cf3d51"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "x-ratelimit-limit",
+                  "value": "120"
+                },
+                {
+                  "key": "x-ratelimit-remaining",
+                  "value": "118"
+                },
+                {
+                  "key": "x-ratelimit-reset",
+                  "value": "1778871364"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "x-envoy-upstream-service-time",
+                  "value": "11801"
+                },
+                {
+                  "key": "cf-cache-status",
+                  "value": "DYNAMIC"
+                },
+                {
+                  "key": "set-cookie",
+                  "value": "__cf_bm=YKsqiiyAU7DfvxC2ANIFGNbOsix_SDBcLaCQoZqjALs-1778871361.3579962-1.0.1.1-VP6q71e7CvotZC7sSsepuUyN91dGANJOIrML3EK7A00dOUE1dV2t2sB8rYzYTld6NfJ3Mywmd_JmuOPmCdB.taOZwqDGPCW5p2m34KJcMgZ18o1.XiCC1mgxddHuqu3C; HttpOnly; SameSite=None; Secure; Path=/; Domain=pstmn.io; Expires=Fri, 15 May 2026 19:26:13 GMT"
+                },
+                {
+                  "key": "Content-Encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "Server",
+                  "value": "cloudflare"
+                },
+                {
+                  "key": "CF-RAY",
+                  "value": "9fc45c387883ac57-YYZ"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"FinPay User\",\n  \"email\": \"user@finpay.com\",\n  \"role\": \"customer\"\n}"
+            },
+            {
+              "name": "User Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/0",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "0"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n  \"error\": \"User not found\"\r\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
