@@ -1,0 +1,40 @@
+{
+	"id": "aba773d2-23dd-41cd-aecf-6b6c609c2d76",
+	"name": "FinPay - Dev Environment",
+	"values": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "payment_id",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "invoice_id",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"color": null,
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2026-05-15T20:14:44.772Z",
+	"_postman_exported_using": "Postman/11.97.0"
+}
